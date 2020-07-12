@@ -37,12 +37,12 @@ namespace CareerCloud.BusinessLogicLayer
                     exceptions.Add(new ValidationException(107, "Length of Major cannot be empty or less than 3 characters"));
                 }
 
-                if (poco.StartDate > DateTime.Now)
+                if (poco.StartDate.HasValue && poco.StartDate > DateTime.Now)
                 {
                     exceptions.Add(new ValidationException(108, "StartDate cannot be greater than today"));
                 }
 
-                if (poco.CompletionDate < poco.StartDate)
+                if (poco.StartDate.HasValue && poco.CompletionDate < poco.StartDate)
                 {
                     exceptions.Add(new ValidationException(109, "CompletionDate cannot be earlier than StartDate"));
                 }
