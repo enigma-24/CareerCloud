@@ -32,7 +32,7 @@ namespace CareerCloud.BusinessLogicLayer
                 {
                     exceptions.Add(new ValidationException(107, "Length of Major cannot be empty or less than 3 characters"));
                 }
-                else if (poco.Major.Length < 3)
+                else if (poco.Major.Trim().Length < 3)
                 {
                     exceptions.Add(new ValidationException(107, "Length of Major cannot be empty or less than 3 characters"));
                 }
