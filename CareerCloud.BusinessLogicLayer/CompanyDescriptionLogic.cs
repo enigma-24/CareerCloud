@@ -30,12 +30,12 @@ namespace CareerCloud.BusinessLogicLayer
             {
                 if (string.IsNullOrEmpty(poco.CompanyDescription))
                     exceptions.Add(new ValidationException(107, "CompanyDescription must be greater than 2 characters"));
-                else if (poco.CompanyDescription.Length <= 2)
+                else if (poco.CompanyDescription.Trim().Length <= 2)
                     exceptions.Add(new ValidationException(107, "CompanyDescription must be greater than 2 characters"));
 
                 if (string.IsNullOrEmpty(poco.CompanyName))
                     exceptions.Add(new ValidationException(106, "CompanyName must be greater than 2 characters"));
-                else if (poco.CompanyName.Length <= 2)
+                else if (poco.CompanyName.Trim().Length <= 2)
                     exceptions.Add(new ValidationException(106, "CompanyName must be greater than 2 characters"));
             }
 
