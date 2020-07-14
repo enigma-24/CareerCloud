@@ -28,7 +28,7 @@ namespace CareerCloud.BusinessLogicLayer
 
             foreach (ApplicantEducationPoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.Major))
+                if (string.IsNullOrWhiteSpace(poco.Major))
                 {
                     exceptions.Add(new ValidationException(107, "Length of Major cannot be empty or less than 3 characters"));
                 }
