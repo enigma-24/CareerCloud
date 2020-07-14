@@ -55,7 +55,7 @@ namespace CareerCloud.BusinessLogicLayer
 
             foreach (var poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.Password))
+                if (string.IsNullOrWhiteSpace(poco.Password))
                 {
                     exceptions.Add(new ValidationException(700, $"Password for SecurityLogin {poco.Id} cannot be null"));
                 }
@@ -68,7 +68,7 @@ namespace CareerCloud.BusinessLogicLayer
                     exceptions.Add(new ValidationException(701, $"Password for SecurityLogin {poco.Id} must contain an extended character of '$', '*', '#', '_' or '@' ."));
                 }
 
-                if (string.IsNullOrEmpty(poco.PhoneNumber))
+                if (string.IsNullOrWhiteSpace(poco.PhoneNumber))
                 {
                     exceptions.Add(new ValidationException(702, $"PhoneNumber for SecurityLogin {poco.Id} is required"));
                 }
@@ -96,7 +96,7 @@ namespace CareerCloud.BusinessLogicLayer
                     }
                 }
 
-                if (string.IsNullOrEmpty(poco.EmailAddress))
+                if (string.IsNullOrWhiteSpace(poco.EmailAddress))
                 {
                     exceptions.Add(new ValidationException(704, "EmailAddress for SecurityLogin {poco.Id} is not a valid email address format."));
                 }
@@ -105,7 +105,7 @@ namespace CareerCloud.BusinessLogicLayer
                     exceptions.Add(new ValidationException(704, "EmailAddress for SecurityLogin {poco.Id} is not a valid email address format."));
                 }
 
-                if (string.IsNullOrEmpty(poco.FullName))
+                if (string.IsNullOrWhiteSpace(poco.FullName))
                 {
                     exceptions.Add(new ValidationException(705, "FullName for SecurityLogin {poco.Id} is required."));
                 }

@@ -28,7 +28,7 @@ namespace CareerCloud.BusinessLogicLayer
 
             foreach (ApplicantResumePoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.Resume))
+                if (string.IsNullOrWhiteSpace(poco.Resume))
                     exceptions.Add(new ValidationException(113, "Resume cannot be empty"));
             }
 

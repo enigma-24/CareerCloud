@@ -31,7 +31,7 @@ namespace CareerCloud.BusinessLogicLayer
                 if (poco.CompanyWebsite != null && !(poco.CompanyWebsite.EndsWith(".ca") || poco.CompanyWebsite.EndsWith(".com") || poco.CompanyWebsite.EndsWith(".biz")))
                     exceptions.Add(new ValidationException(600, "Valid websites must end with the extensions - '.ca','.com', '.biz'"));
 
-                if(string.IsNullOrEmpty(poco.ContactPhone))
+                if(string.IsNullOrWhiteSpace(poco.ContactPhone))
                     exceptions.Add(new ValidationException(601, "Must correspond to a valid phone number"));
                 else if(!VerifyPhoneNumber(poco.ContactPhone))
                     exceptions.Add(new ValidationException(601, "Must correspond to a valid phone number"));

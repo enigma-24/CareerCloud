@@ -28,7 +28,7 @@ namespace CareerCloud.BusinessLogicLayer
 
             foreach (SecurityRolePoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.Role))
+                if (string.IsNullOrWhiteSpace(poco.Role))
                     exceptions.Add(new ValidationException(800, "Role cannot be empty"));
             }
 
