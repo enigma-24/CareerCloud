@@ -2,30 +2,45 @@
 using CareerCloud.Pocos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CareerCloud.BusinessLogicLayer
 {
     public class SystemCountryCodeLogic
     {
-        public SystemCountryCodeLogic(IDataRepository<SystemCountryCodePoco> repository){}
+        private IDataRepository<SystemCountryCodePoco> _repository;
+
+        public SystemCountryCodeLogic(IDataRepository<SystemCountryCodePoco> repository)
+        {
+            _repository = repository;
+        }
+
+        public SystemCountryCodePoco Get(string code)
+        {
+            return _repository.GetSingle(c => c.Code == code);
+        }
+
+        public List<SystemCountryCodePoco> GetAll()
+        {
+            return _repository.GetAll().ToList();
+        }
 
         public void Add(SystemCountryCodePoco[] pocos)
         {
             Verify(pocos);
-            foreach (SystemCountryCodePoco poco in pocos)
-            {
-               //add
-            }
+            _repository.Add(pocos);
         }
 
         public void Update(SystemCountryCodePoco[] pocos)
         {
             Verify(pocos);
-            foreach (SystemCountryCodePoco poco in pocos)
-            {
-                //update
-            }
+            _repository.Update(pocos);
+        }
+
+        public void Delete(SystemCountryCodePoco[] pocos)
+        {
+            _repository.Remove(pocos);
         }
 
         private void Verify(SystemCountryCodePoco[] pocos)
@@ -34,7 +49,11 @@ namespace CareerCloud.BusinessLogicLayer
 
             foreach (SystemCountryCodePoco poco in pocos)
             {
-                
+                if (string.IsNullOrWhiteSpace(poco.Code))
+                    exceptions.Add(new ValidationException(900, "Code cannot be empty"));
+
+                if(string.IsNullOrWhiteSpace(poco.Name))
+                    exceptions.Add(new ValidationException(901, "Name cannot be empty"));
             }
 
             if (exceptions.Count > 0)
