@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CareerCloud.Pocos
@@ -13,5 +15,7 @@ namespace CareerCloud.Pocos
 
         [Column("Native_Name")]
         public string NativeName { get; set; }
+
+        public virtual ICollection<CompanyDescriptionPoco> CompanyDescriptions { get; set; }
     }
 }
