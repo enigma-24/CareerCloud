@@ -28,6 +28,7 @@ namespace CareerCloud.Pocos
         public byte[] CompanyLogo { get; set; }
 
         [Column("Time_Stamp")]
+        [Timestamp]
         public byte[] TimeStamp { get; set; }
 
         public virtual ICollection<CompanyDescriptionPoco> CompanyDescriptions { get; set; }

@@ -24,6 +24,7 @@ namespace CareerCloud.Pocos
         public bool IsCompanyHidden { get; set; }
 
         [Column("Time_Stamp")]
+        [Timestamp]
         public byte[] TimeStamp { get; set; }
 
         public virtual CompanyProfilePoco CompanyProfile { get; set; }
