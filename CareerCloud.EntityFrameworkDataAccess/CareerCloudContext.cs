@@ -53,8 +53,6 @@ namespace CareerCloud.EntityFrameworkDataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<ApplicantEducationPoco>()
                 .HasOne(ae => ae.ApplicantProfile)
                 .WithMany(ap => ap.ApplicantEducations)
@@ -78,7 +76,7 @@ namespace CareerCloud.EntityFrameworkDataAccess
             modelBuilder.Entity<ApplicantProfilePoco>()
                 .HasOne(ap => ap.SystemCountryCode)
                 .WithMany(scc => scc.ApplicantProfiles)
-                .HasForeignKey(ap => ap.SystemCountryCode);
+                .HasForeignKey(ap => ap.Country);
 
             modelBuilder.Entity<ApplicantResumePoco>()
                 .HasOne(ar => ar.ApplicantProfile)
@@ -135,21 +133,10 @@ namespace CareerCloud.EntityFrameworkDataAccess
                 .WithMany(cp => cp.CompanyLocations)
                 .HasForeignKey(cl => cl.Company);
 
-            modelBuilder.Entity<SecurityLoginsLogPoco>()
-                .HasOne(sll => sll.SecurityLogin)
-                .WithMany(sl => sl.SecurityLoginsLogs)
-                .HasForeignKey(sll => sll.Login);
+            // relationships can also be defined using annotations on respective entity models
+            // Data annotations used for SecurityLoginsLogPoco and SecurityLoginsRolePoco
 
-            modelBuilder.Entity<SecurityLoginsRolePoco>()
-                .HasOne(slr => slr.SecurityLogin)
-                .WithMany(sl => sl.SecurityLoginsRoles)
-                .HasForeignKey(slr => slr.Login);
-
-            modelBuilder.Entity<SecurityLoginsRolePoco>()
-                .HasOne(slr => slr.SecurityRole)
-                .WithMany(sr => sr.SecurityLoginsRoles)
-                .HasForeignKey(slr => slr.Role);
-                
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
