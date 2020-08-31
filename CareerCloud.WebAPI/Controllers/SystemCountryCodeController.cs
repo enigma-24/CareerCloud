@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CareerCloud.BusinessLogicLayer;
 using CareerCloud.EntityFrameworkDataAccess;
 using CareerCloud.Pocos;
@@ -19,6 +17,50 @@ namespace CareerCloud.WebAPI.Controllers
         {
             EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>();
             logic = new SystemCountryCodeLogic(repo);
+        }
+
+        [HttpGet]
+        [Route("countrycode/{code}")]
+        [ProducesResponseType(typeof(SystemCountryCodePoco), 200)]
+        public IActionResult GetSystemCountryCode(string code)
+        {
+            SystemCountryCodePoco poco = logic.Get(code);
+            if (poco != null)
+                return Ok(poco);
+            else
+                return NotFound();
+        }
+
+        [HttpPost]
+        [Route("countrycode")]
+        public IActionResult PostSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        {
+            logic.Add(pocos);
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("countrycode")]
+        public IActionResult PutSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        {
+            logic.Update(pocos);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("countrycode")]
+        public IActionResult DeleteSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        {
+            logic.Delete(pocos);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("countrycode")]
+        [ProducesResponseType(typeof(List<SystemCountryCodePoco>), 200)]
+        public IActionResult GetAllSystemCountryCode()
+        {
+            return Ok(logic.GetAll());
         }
     }
 }
