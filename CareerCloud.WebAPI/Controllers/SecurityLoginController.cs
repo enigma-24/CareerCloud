@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityLoginController : ControllerBase
     {
-        private SecurityLoginLogic logic;
+        private readonly SecurityLoginLogic logic;
         public SecurityLoginController()
         {
             EFGenericRepository<SecurityLoginPoco> repo = new EFGenericRepository<SecurityLoginPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("login/{id}")]
         [ProducesResponseType(typeof(SecurityLoginPoco), 200)]
-        public IActionResult GetSecurityLogin(Guid id)
+        public ActionResult GetSecurityLogin(Guid id)
         {
             SecurityLoginPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("login")]
-        public IActionResult PostSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
+        public ActionResult PostSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("login")]
-        public IActionResult PutSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
+        public ActionResult PutSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("login")]
-        public IActionResult DeleteSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
+        public ActionResult DeleteSecurityLogin([FromBody] SecurityLoginPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("login")]
         [ProducesResponseType(typeof(List<SecurityLoginPoco>), 200)]
-        public IActionResult GetAllSecurityLogin()
+        public ActionResult GetAllSecurityLogin()
         {
             return Ok(logic.GetAll());
         }

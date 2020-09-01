@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyProfileController : ControllerBase
     {
-        private CompanyProfileLogic logic;
+        private readonly CompanyProfileLogic logic;
         public CompanyProfileController()
         {
             EFGenericRepository<CompanyProfilePoco> repo = new EFGenericRepository<CompanyProfilePoco>();
@@ -21,9 +21,9 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("profile/{id}")]
         [ProducesResponseType(typeof(CompanyProfilePoco), 200)]
-        public IActionResult GetCompanyProfile(Guid id)
+        public ActionResult GetCompanyProfile(Guid id)
         {
-            ApplicantEducationPoco poco = logic.Get(id);
+            CompanyProfilePoco poco = logic.Get(id);
             if (poco != null)
                 return Ok(poco);
             else
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("profile")]
-        public IActionResult PostCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
+        public ActionResult PostCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("profile")]
-        public IActionResult PutCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
+        public ActionResult PutCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("profile")]
-        public IActionResult DeleteCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
+        public ActionResult DeleteCompanyProfile([FromBody] CompanyProfilePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("profile")]
         [ProducesResponseType(typeof(List<CompanyProfilePoco>), 200)]
-        public IActionResult GetAllCompanyProfile()
+        public ActionResult GetAllCompanyProfile()
         {
             return Ok(logic.GetAll());
         }

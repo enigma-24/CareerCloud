@@ -14,7 +14,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SystemLanguageCodeController : ControllerBase
     {
-        private SystemLanguageCodeLogic logic;
+        private readonly SystemLanguageCodeLogic logic;
         public SystemLanguageCodeController()
         {
             EFGenericRepository<SystemLanguageCodePoco> repo = new EFGenericRepository<SystemLanguageCodePoco>();
@@ -24,7 +24,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("languagecode/{languageId}")]
         [ProducesResponseType(typeof(SystemLanguageCodePoco), 200)]
-        public IActionResult GetSystemLanguageCode(string languageId)
+        public ActionResult GetSystemLanguageCode(string languageId)
         {
             SystemLanguageCodePoco poco = logic.Get(languageId);
             if (poco != null)
@@ -35,7 +35,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("languagecode")]
-        public IActionResult PostSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
+        public ActionResult PostSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -43,7 +43,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("languagecode")]
-        public IActionResult PutSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
+        public ActionResult PutSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -51,7 +51,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("languagecode")]
-        public IActionResult DeleteSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
+        public ActionResult DeleteSystemLanguageCode([FromBody] SystemLanguageCodePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -60,7 +60,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("languagecode")]
         [ProducesResponseType(typeof(List<SystemLanguageCodePoco>), 200)]
-        public IActionResult GetAllSystemLanguageCode()
+        public ActionResult GetAllSystemLanguageCode()
         {
             return Ok(logic.GetAll());
         }

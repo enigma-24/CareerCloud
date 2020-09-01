@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantWorkHistoryController : ControllerBase
     {
-        private ApplicantWorkHistoryLogic logic;
+        private readonly ApplicantWorkHistoryLogic logic;
         public ApplicantWorkHistoryController()
         {
             EFGenericRepository<ApplicantWorkHistoryPoco> repo = new EFGenericRepository<ApplicantWorkHistoryPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("workhistory/{id}")]
         [ProducesResponseType(typeof(ApplicantWorkHistoryPoco),200)]
-        public IActionResult GetApplicantWorkHistory(Guid id)
+        public ActionResult GetApplicantWorkHistory(Guid id)
         {
             ApplicantWorkHistoryPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("workhistory")]
-        public IActionResult PostApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
+        public ActionResult PostApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("workhistory")]
-        public IActionResult PutApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
+        public ActionResult PutApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("workhistory")]
-        public IActionResult DeleteApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
+        public ActionResult DeleteApplicantWorkHistory([FromBody] ApplicantWorkHistoryPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("workhistory")]
         [ProducesResponseType(typeof(List<ApplicantWorkHistoryPoco>), 200)]
-        public IActionResult GetAllApplicantWorkHistory()
+        public ActionResult GetAllApplicantWorkHistory()
         {
             return Ok(logic.GetAll());
         }

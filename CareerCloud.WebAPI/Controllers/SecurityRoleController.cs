@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityRoleController : ControllerBase
     {
-        private SecurityRoleLogic logic;
+        private readonly SecurityRoleLogic logic;
         public SecurityRoleController()
         {
             EFGenericRepository<SecurityRolePoco> repo = new EFGenericRepository<SecurityRolePoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("role/{id}")]
         [ProducesResponseType(typeof(SecurityRolePoco), 200)]
-        public IActionResult GetSecurityRole(Guid id)
+        public ActionResult GetSecurityRole(Guid id)
         {
             SecurityRolePoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("role")]
-        public IActionResult PostSecurityRole([FromBody] SecurityRolePoco[] pocos)
+        public ActionResult PostSecurityRole([FromBody] SecurityRolePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("role")]
-        public IActionResult PutSecurityRole([FromBody] SecurityRolePoco[] pocos)
+        public ActionResult PutSecurityRole([FromBody] SecurityRolePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("role")]
-        public IActionResult DeleteSecurityRole([FromBody] SecurityRolePoco[] pocos)
+        public ActionResult DeleteSecurityRole([FromBody] SecurityRolePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("role")]
         [ProducesResponseType(typeof(List<SecurityRolePoco>), 200)]
-        public IActionResult GetAllSecurityRole()
+        public ActionResult GetAllSecurityRole()
         {
             return Ok(logic.GetAll());
         }

@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantEducationController : ControllerBase
     {
-        private ApplicantEducationLogic logic;
+        private readonly ApplicantEducationLogic logic;
         public ApplicantEducationController()
         {
             EFGenericRepository<ApplicantEducationPoco> repo = new EFGenericRepository<ApplicantEducationPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education/{id}")]
         [ProducesResponseType(typeof(ApplicantEducationPoco), 200)]
-        public IActionResult GetApplicantEducation(Guid id)
+        public ActionResult GetApplicantEducation(Guid id)
         {
             ApplicantEducationPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("education")]
-        public IActionResult PostApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
+        public ActionResult PostApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("education")]
-        public IActionResult PutApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
+        public ActionResult PutApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("education")]
-        public IActionResult DeleteApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
+        public ActionResult DeleteApplicantEducation([FromBody] ApplicantEducationPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("education")]
         [ProducesResponseType(typeof(List<ApplicantEducationPoco>), 200)]
-        public IActionResult GetAllApplicantEducation()
+        public ActionResult GetAllApplicantEducation()
         {
             return Ok(logic.GetAll());
         }

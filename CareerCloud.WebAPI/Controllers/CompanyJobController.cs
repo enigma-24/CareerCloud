@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobController : ControllerBase
     {
-        private CompanyJobLogic logic;
+        private readonly CompanyJobLogic logic;
         public CompanyJobController()
         {
             EFGenericRepository<CompanyJobPoco> repo = new EFGenericRepository<CompanyJobPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("job")]
         [ProducesResponseType(typeof(CompanyJobPoco),200)]
-        public IActionResult GetCompanyJob(Guid id)
+        public ActionResult GetCompanyJob(Guid id)
         {
             CompanyJobPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("job")]
-        public IActionResult PostCompanyJob([FromBody] CompanyJobPoco[] pocos)
+        public ActionResult PostCompanyJob([FromBody] CompanyJobPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("job")]
-        public IActionResult PutCompanyJob([FromBody] CompanyJobPoco[] pocos)
+        public ActionResult PutCompanyJob([FromBody] CompanyJobPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("job")]
-        public IActionResult DeleteCompanyJob([FromBody] CompanyJobPoco[] pocos)
+        public ActionResult DeleteCompanyJob([FromBody] CompanyJobPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("job")]
         [ProducesResponseType(typeof(List<CompanyJobPoco>), 200)]
-        public IActionResult GetAllCompanyJob()
+        public ActionResult GetAllCompanyJob()
         {
             return Ok(logic.GetAll());
         }

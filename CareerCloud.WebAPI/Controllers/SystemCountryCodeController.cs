@@ -12,7 +12,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SystemCountryCodeController : ControllerBase
     {
-        private SystemCountryCodeLogic logic;
+        private readonly SystemCountryCodeLogic logic;
         public SystemCountryCodeController()
         {
             EFGenericRepository<SystemCountryCodePoco> repo = new EFGenericRepository<SystemCountryCodePoco>();
@@ -22,7 +22,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("countrycode/{code}")]
         [ProducesResponseType(typeof(SystemCountryCodePoco), 200)]
-        public IActionResult GetSystemCountryCode(string code)
+        public ActionResult GetSystemCountryCode(string code)
         {
             SystemCountryCodePoco poco = logic.Get(code);
             if (poco != null)
@@ -33,7 +33,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("countrycode")]
-        public IActionResult PostSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        public ActionResult PostSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -41,7 +41,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("countrycode")]
-        public IActionResult PutSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        public ActionResult PutSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -49,7 +49,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("countrycode")]
-        public IActionResult DeleteSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
+        public ActionResult DeleteSystemCountryCode([FromBody] SystemCountryCodePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -58,7 +58,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("countrycode")]
         [ProducesResponseType(typeof(List<SystemCountryCodePoco>), 200)]
-        public IActionResult GetAllSystemCountryCode()
+        public ActionResult GetAllSystemCountryCode()
         {
             return Ok(logic.GetAll());
         }

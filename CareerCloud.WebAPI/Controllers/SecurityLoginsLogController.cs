@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityLoginsLogController : ControllerBase
     {
-        private SecurityLoginsLogLogic logic;
+        private readonly SecurityLoginsLogLogic logic;
         public SecurityLoginsLogController()
         {
             EFGenericRepository<SecurityLoginsLogPoco> repo = new EFGenericRepository<SecurityLoginsLogPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("loginslog/{id}")]
         [ProducesResponseType(typeof(SecurityLoginsLogPoco), 200)]
-        public IActionResult GetSecurityLoginsLog(Guid id)
+        public ActionResult GetSecurityLoginLog(Guid id)
         {
             SecurityLoginsLogPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("loginslog")]
-        public IActionResult PostSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] pocos)
+        public ActionResult PostSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("loginslog")]
-        public IActionResult PutSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] pocos)
+        public ActionResult PutSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("loginslog")]
-        public IActionResult DeleteSecurityLoginsLog([FromBody] SecurityLoginsLogPoco[] pocos)
+        public ActionResult DeleteSecurityLoginLog([FromBody] SecurityLoginsLogPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("loginslog")]
         [ProducesResponseType(typeof(List<SecurityLoginsLogPoco>), 200)]
-        public IActionResult GetAllSecurityLoginsLog()
+        public ActionResult GetAllSecurityLoginsLog()
         {
             return Ok(logic.GetAll());
         }

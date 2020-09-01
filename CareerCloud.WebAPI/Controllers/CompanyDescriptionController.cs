@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyDescriptionController : ControllerBase
     {
-        private CompanyDescriptionLogic logic;
+        private readonly CompanyDescriptionLogic logic;
         public CompanyDescriptionController()
         {
             EFGenericRepository<CompanyDescriptionPoco> repo = new EFGenericRepository<CompanyDescriptionPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("description/{id}")]
         [ProducesResponseType(typeof(CompanyDescriptionPoco),200)]
-        public IActionResult GetCompanyDescription(Guid id)
+        public ActionResult GetCompanyDescription(Guid id)
         {
             CompanyDescriptionPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("description")]
-        public IActionResult PutCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
+        public ActionResult PutCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("description")]
-        public IActionResult PostCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
+        public ActionResult PostCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("description")]
-        public IActionResult DeleteCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
+        public ActionResult DeleteCompanyDescription([FromBody] CompanyDescriptionPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("description")]
         [ProducesResponseType(typeof(List<CompanyDescriptionPoco>), 200)]
-        public IActionResult GetAllCompanyDescription()
+        public ActionResult GetAllCompanyDescription()
         {
             return Ok(logic.GetAll());
         }

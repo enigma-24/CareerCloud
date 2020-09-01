@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantResumeController : ControllerBase
     {
-        private ApplicantResumeLogic logic;
+        private readonly ApplicantResumeLogic logic;
         public ApplicantResumeController()
         {
             EFGenericRepository<ApplicantResumePoco> repo = new EFGenericRepository<ApplicantResumePoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("resume/{id}")]
         [ProducesResponseType(typeof(ApplicantResumePoco),200)]
-        public IActionResult GetApplicantResume(Guid id)
+        public ActionResult GetApplicantResume(Guid id)
         {
             ApplicantResumePoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("resume")]
-        public IActionResult PostApplicantResume([FromBody] ApplicantResumePoco[] pocos)
+        public ActionResult PostApplicantResume([FromBody] ApplicantResumePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("resume")]
-        public IActionResult PutApplicantResume([FromBody] ApplicantResumePoco[] pocos)
+        public ActionResult PutApplicantResume([FromBody] ApplicantResumePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("resume")]
-        public IActionResult DeleteApplicantResume([FromBody] ApplicantResumePoco[] pocos)
+        public ActionResult DeleteApplicantResume([FromBody] ApplicantResumePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("resume")]
         [ProducesResponseType(typeof(List<ApplicantResumePoco>), 200)]
-        public IActionResult GetAllApplicantResume()
+        public ActionResult GetAllApplicantResume()
         {
             return Ok(logic.GetAll());
         }

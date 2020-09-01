@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantSkillController : ControllerBase
     {
-        private ApplicantSkillLogic logic;
+        private readonly ApplicantSkillLogic logic;
         public ApplicantSkillController()
         {
             EFGenericRepository<ApplicantSkillPoco> repo = new EFGenericRepository<ApplicantSkillPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("skill/{id}")]
         [ProducesResponseType(typeof(ApplicantSkillPoco), 200)]
-        public IActionResult GetApplicantSkill(Guid id)
+        public ActionResult GetApplicantSkill(Guid id)
         {
             ApplicantSkillPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("skill")]
-        public IActionResult PostApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
+        public ActionResult PostApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("skill")]
-        public IActionResult PutApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
+        public ActionResult PutApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("skill")]
-        public IActionResult DeleteApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
+        public ActionResult DeleteApplicantSkill([FromBody] ApplicantSkillPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("skill")]
         [ProducesResponseType(typeof(List<ApplicantSkillPoco>), 200)]
-        public IActionResult GetAllApplicantSkill()
+        public ActionResult GetAllApplicantSkill()
         {
             return Ok(logic.GetAll());
         }

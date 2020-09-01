@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobSkillController : ControllerBase
     {
-        private CompanyJobSkillLogic logic;
+        private readonly CompanyJobSkillLogic logic;
         public CompanyJobSkillController()
         {
             EFGenericRepository<CompanyJobSkillPoco> repo = new EFGenericRepository<CompanyJobSkillPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobskill")]
         [ProducesResponseType(typeof(CompanyJobSkillPoco),200)]
-        public IActionResult GetCompanyJobSkill(Guid id)
+        public ActionResult GetCompanyJobSkill(Guid id)
         {
             CompanyJobSkillPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("jobskill")]
-        public IActionResult PostCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
+        public ActionResult PostCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("jobskill")]
-        public IActionResult PutCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
+        public ActionResult PutCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("jobskill")]
-        public IActionResult DeleteCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
+        public ActionResult DeleteCompanyJobSkill([FromBody] CompanyJobSkillPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobskill")]
         [ProducesResponseType(typeof(List<CompanyJobSkillPoco>), 200)]
-        public IActionResult GetAllCompanyJobSkill()
+        public ActionResult GetAllCompanyJobSkill()
         {
             return Ok(logic.GetAll());
         }

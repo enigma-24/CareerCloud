@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyJobEducationController : ControllerBase
     {
-        private CompanyJobEducationLogic logic;
+        private readonly CompanyJobEducationLogic logic;
         public CompanyJobEducationController()
         {
             EFGenericRepository<CompanyJobEducationPoco> repo = new EFGenericRepository<CompanyJobEducationPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobeducation")]
         [ProducesResponseType(typeof(CompanyJobEducationPoco), 200)]
-        public IActionResult GetCompanyJobEducation(Guid id)
+        public ActionResult GetCompanyJobEducation(Guid id)
         {
             CompanyJobEducationPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("jobeducation")]
-        public IActionResult PostCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
+        public ActionResult PostCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("jobeducation")]
-        public IActionResult PutCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
+        public ActionResult PutCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("jobeducation")]
-        public IActionResult DeleteCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
+        public ActionResult DeleteCompanyJobEducation([FromBody] CompanyJobEducationPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobeducation")]
         [ProducesResponseType(typeof(List<CompanyJobEducationPoco>), 200)]
-        public IActionResult GetAllCompanyJobEducation()
+        public ActionResult GetAllCompanyJobEducation()
         {
             return Ok(logic.GetAll());
         }

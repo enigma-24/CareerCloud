@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantJobApplicationController : ControllerBase
     {
-        private ApplicantJobApplicationLogic logic;
+        private readonly ApplicantJobApplicationLogic logic;
         public ApplicantJobApplicationController()
         {
             EFGenericRepository<ApplicantJobApplicationPoco> repo = new EFGenericRepository<ApplicantJobApplicationPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobapplication/{id}")]
         [ProducesResponseType(typeof(ApplicantJobApplicationPoco),200)]
-        public IActionResult GetApplicantJobApplication(Guid id)
+        public ActionResult GetApplicantJobApplication(Guid id)
         {
             ApplicantJobApplicationPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("jobapplication")]
-        public IActionResult PostApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
+        public ActionResult PostApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("jobapplication")]
-        public IActionResult PutApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
+        public ActionResult PutApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("jobapplication")]
-        public IActionResult DeleteApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
+        public ActionResult DeleteApplicantJobApplication([FromBody] ApplicantJobApplicationPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("jobapplication")]
         [ProducesResponseType(typeof(List<ApplicantJobApplicationPoco>),200)]
-        public IActionResult GetAllApplicantJobApplication()
+        public ActionResult GetAllApplicantJobApplication()
         {
             return Ok(logic.GetAll());
         }

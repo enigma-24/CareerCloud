@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class SecurityLoginsRoleController : ControllerBase
     {
-        private SecurityLoginsRoleLogic logic;
+        private readonly SecurityLoginsRoleLogic logic;
         public SecurityLoginsRoleController()
         {
             EFGenericRepository<SecurityLoginsRolePoco> repo = new EFGenericRepository<SecurityLoginsRolePoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("loginsrole/{id}")]
         [ProducesResponseType(typeof(SecurityLoginsRolePoco), 200)]
-        public IActionResult GetSecurityLoginsRole(Guid id)
+        public ActionResult GetSecurityLoginsRole(Guid id)
         {
             SecurityLoginsRolePoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("loginsrole")]
-        public IActionResult PostSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] pocos)
+        public ActionResult PostSecurityLoginRole([FromBody] SecurityLoginsRolePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("loginsrole")]
-        public IActionResult PutSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] pocos)
+        public ActionResult PutSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("loginsrole")]
-        public IActionResult DeleteSecurityLoginsRole([FromBody] SecurityLoginsRolePoco[] pocos)
+        public ActionResult DeleteSecurityLoginRole([FromBody] SecurityLoginsRolePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("loginsrole")]
         [ProducesResponseType(typeof(List<SecurityLoginsRolePoco>), 200)]
-        public IActionResult GetAllSecurityLoginsRole()
+        public ActionResult GetAllSecurityLoginsRole()
         {
             return Ok(logic.GetAll());
         }

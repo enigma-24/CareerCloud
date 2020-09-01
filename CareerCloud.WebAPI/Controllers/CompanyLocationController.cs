@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class CompanyLocationController : ControllerBase
     {
-        private CompanyLocationLogic logic;
+        private readonly CompanyLocationLogic logic;
         public CompanyLocationController()
         {
             EFGenericRepository<CompanyLocationPoco> repo = new EFGenericRepository<CompanyLocationPoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("location")]
         [ProducesResponseType(typeof(CompanyLocationPoco),200)]
-        public IActionResult GetCompanyLocation(Guid id)
+        public ActionResult GetCompanyLocation(Guid id)
         {
             CompanyLocationPoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("location")]
-        public IActionResult PostCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
+        public ActionResult PostCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("location")]
-        public IActionResult PutCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
+        public ActionResult PutCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("location")]
-        public IActionResult DeleteCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
+        public ActionResult DeleteCompanyLocation([FromBody] CompanyLocationPoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("location")]
         [ProducesResponseType(typeof(List<CompanyLocationPoco>), 200)]
-        public IActionResult GetAllCompanyLocation()
+        public ActionResult GetAllCompanyLocation()
         {
             return Ok(logic.GetAll());
         }

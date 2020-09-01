@@ -11,7 +11,7 @@ namespace CareerCloud.WebAPI.Controllers
     [ApiController]
     public class ApplicantProfileController : ControllerBase
     {
-        private ApplicantProfileLogic logic;
+        private readonly ApplicantProfileLogic logic;
         public ApplicantProfileController()
         {
             EFGenericRepository<ApplicantProfilePoco> repo = new EFGenericRepository<ApplicantProfilePoco>();
@@ -21,7 +21,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("profile/{id}")]
         [ProducesResponseType(typeof(ApplicantProfilePoco),200)]
-        public IActionResult GetApplicantProfile(Guid id)
+        public ActionResult GetApplicantProfile(Guid id)
         {
             ApplicantProfilePoco poco = logic.Get(id);
             if (poco != null)
@@ -32,7 +32,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPost]
         [Route("profile")]
-        public IActionResult PostApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
+        public ActionResult PostApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
         {
             logic.Add(pocos);
             return Ok();
@@ -40,7 +40,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpPut]
         [Route("profile")]
-        public IActionResult PutApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
+        public ActionResult PutApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
         {
             logic.Update(pocos);
             return Ok();
@@ -48,7 +48,7 @@ namespace CareerCloud.WebAPI.Controllers
 
         [HttpDelete]
         [Route("profile")]
-        public IActionResult DeleteApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
+        public ActionResult DeleteApplicantProfile([FromBody] ApplicantProfilePoco[] pocos)
         {
             logic.Delete(pocos);
             return Ok();
@@ -57,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpGet]
         [Route("profile")]
         [ProducesResponseType(typeof(List<ApplicantProfilePoco>), 200)]
-        public IActionResult GetAllApplicantProfile()
+        public ActionResult GetAllApplicantProfile()
         {
             return Ok(logic.GetAll());
         }
