@@ -55,7 +55,7 @@ namespace CareerCloud.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("jobdescription")]
+        [Route("jobdescriptions")]
         [ProducesResponseType(typeof(List<CompanyJobDescriptionPoco>), 200)]
         public ActionResult GetAllCompanyJobDescription()
         {

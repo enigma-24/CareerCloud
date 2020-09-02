@@ -55,7 +55,7 @@ namespace CareerCloud.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("location")]
+        [Route("locations")]
         [ProducesResponseType(typeof(List<CompanyLocationPoco>), 200)]
         public ActionResult GetAllCompanyLocation()
         {
