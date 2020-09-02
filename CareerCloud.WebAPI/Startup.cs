@@ -37,17 +37,18 @@ namespace CareerCloud.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CareerCloud REST API");
+            });
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CareerCloud REST API");
-            });
 
             app.UseEndpoints(endpoints =>
             {
