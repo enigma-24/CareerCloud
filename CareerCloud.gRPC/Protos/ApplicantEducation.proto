@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service ApplicantEducation{
+	rpc GetApplicantEducation(IdRequest) returns (ApplicantEducationReply); 
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message ApplicantEducationReply{
+	string Id = 1;
+	string Applicant = 2;
+	string Major = 3;
+	string CertificateDiploma = 4;
+	google.protobuf.Timestamp StartDate = 5;
+	google.protobuf.Timestamp CompletionDate = 6;
+	sint32 CompletionPercent = 7;
+	bytes Timestamp = 8;
+}
