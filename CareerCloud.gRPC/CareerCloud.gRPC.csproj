@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.27.0" />
+	  <Protobuf Include="Protos\*" GrpcServices="Server" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\ApplicantJobApplication.proto" />
+    <None Remove="Protos\ApplicantProfile.proto" />
+    <None Remove="Protos\ApplicantResume.proto" />
+    <None Remove="Protos\ApplicantSkill.proto" />
+    <None Remove="Protos\ApplicantWorkHistory.proto" />
+    <None Remove="Protos\CompanyDescription.proto" />
+    <None Remove="Protos\CompanyJob.proto" />
+    <None Remove="Protos\CompanyJobDescription.proto" />
+    <None Remove="Protos\CompanyJobEducation.proto" />
+    <None Remove="Protos\CompanyJobSkill.proto" />
+    <None Remove="Protos\CompanyLocation.proto" />
+    <None Remove="Protos\CompanyProfile.proto" />
+    <None Remove="Protos\SecurityLogin.proto" />
+    <None Remove="Protos\SecurityLoginsLog.proto" />
+    <None Remove="Protos\SecurityLoginsRole.proto" />
+    <None Remove="Protos\SecurityRole.proto" />
+    <None Remove="Protos\SystemCountryCode.proto" />
+    <None Remove="Protos\SystemLanguageCode.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CareerCloud.BusinessLogicLayer\CareerCloud.BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\CareerCloud.EntityFrameworkDataAccess\CareerCloud.EntityFrameworkDataAccess.csproj" />
+    <ProjectReference Include="..\CareerCloud.Pocos\CareerCloud.Pocos.csproj" />
+  </ItemGroup>
+
+</Project>
