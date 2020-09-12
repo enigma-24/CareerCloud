@@ -1,3 +1,23 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service CompanyDescription{
+	rpc GetCompanyDescription(IdRequest) returns (CompanyDescriptionReply);
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message CompanyDescriptionReply{
+	string Id = 1;
+	string Company = 2;
+	string LanguageId = 3;
+	string CompanyName = 4;
+	string CompanyDescription = 5;
+	ByteString TimeStamp = 6; // can be bytes
+}

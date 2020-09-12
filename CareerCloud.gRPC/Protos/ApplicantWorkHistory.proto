@@ -1,3 +1,29 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service ApplicantWorkHistory{
+	rpc GetApplicantWorkHistory(IdRequest) returns (ApplicantWorkHistoryReply);
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message ApplicantWorkHistoryReply{
+	string Id = 1;
+	string Applicant = 2;
+	string CompanyName = 3;
+	string CountryCode = 4;
+	string Location = 5;
+	string JobTitle = 6;
+	string JobDescription = 7;
+	int32 StartMonth = 8;
+	int32 StartYear = 9;
+	int32 EndMonth = 10;
+	int32 EndYear = 11;
+	ByteString Timestamp = 12;
+}

@@ -1,3 +1,23 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service CompanyJob{
+	rpc GetCompanyJob(IdRequest) returns (CompanyJobReply);
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message CompanyJobReply{
+	string Id = 1;
+	string Company = 2;
+	google.protobuf.Timestamp ProfileCreated = 3;
+	bool IsInactive = 4;
+	bool IsCompanyHidden = 5;
+	ByteString TimeStamp = 6; // can be bytes
+}

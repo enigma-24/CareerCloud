@@ -1,3 +1,21 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service ApplicantResume{
+	rpc GetApplicantResume(IdRequest) returns (ApplicantResumeReply);	
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message ApplicantResumeReply{
+	string Id = 1;
+	string Applicant = 2;
+	string Resume = 3;
+	google.protobuf.Timestamp LastUpdated = 4;
+}

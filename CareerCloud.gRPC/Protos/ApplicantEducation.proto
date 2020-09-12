@@ -21,5 +21,5 @@ message ApplicantEducationReply{
 	google.protobuf.Timestamp StartDate = 5;
 	google.protobuf.Timestamp CompletionDate = 6;
 	sint32 CompletionPercent = 7;
-	bytes Timestamp = 8;
+	ByteString Timestamp = 8; // can be bytes
 }

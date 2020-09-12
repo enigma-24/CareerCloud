@@ -1,3 +1,28 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 option csharp_namespace = "CareerCloud.gRPC.Protos";
+
+service ApplicantProfile{
+	rpc GetApplicantProfile(IdRequest) returns (ApplicantProfileReply);
+}
+
+message IdRequest{
+	string Id = 1;
+}
+
+message ApplicantProfileReply{
+	string Id = 1;
+	string Login = 2;
+	//decimal CurrentSalary = 3;
+	//decimal CurrentRate = 4;
+	string Currency = 5;
+	string Country = 6;
+	string Province = 7;
+	string Street = 8;
+	string City = 9;
+	string PostalCode = 10;
+	bytes Timestamp = 11;
+}
