@@ -1,15 +1,19 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
 
 service CompanyJob{
-	rpc GetCompanyJob(IdRequest) returns (CompanyJobReply);
+	rpc GetCompanyJob(CompanyJobIdRequest) returns (CompanyJobReply);
+	rpc GetAllCompanyJob(google.protobuf.Empty) returns (CompanyJobList);
+	rpc AddCompanyJob(CompanyJobList) returns (google.protobuf.Empty);
+	rpc UpdateCompanyJob(CompanyJobList) returns (google.protobuf.Empty);
+	rpc DeleteCompanyJob(CompanyJobList) returns (google.protobuf.Empty);
 }
 
-message IdRequest{
+message CompanyJobIdRequest{
 	string Id = 1;
 }
 
@@ -19,5 +23,9 @@ message CompanyJobReply{
 	google.protobuf.Timestamp ProfileCreated = 3;
 	bool IsInactive = 4;
 	bool IsCompanyHidden = 5;
-	ByteString TimeStamp = 6; // can be bytes
+	bytes TimeStamp = 6;
+}
+
+message CompanyJobList{
+	repeated CompanyJobReply CompanyJobs = 1;
 }

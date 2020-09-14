@@ -1,15 +1,19 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
 
 service ApplicantEducation{
-	rpc GetApplicantEducation(IdRequest) returns (ApplicantEducationReply); 
+	rpc GetApplicantEducation(AppEduIdRequest) returns (ApplicantEducationReply); 
+	rpc GetAllApplicantEducation(google.protobuf.Empty) returns (ApplicantEducationList); 
+	rpc AddApplicantEducation(ApplicantEducationList) returns (google.protobuf.Empty); 
+	rpc UpdateApplicantEducation(ApplicantEducationList) returns (google.protobuf.Empty); 
+	rpc DeleteApplicantEducation(ApplicantEducationList) returns (google.protobuf.Empty); 
 }
 
-message IdRequest{
+message AppEduIdRequest{
 	string Id = 1;
 }
 
@@ -21,5 +25,9 @@ message ApplicantEducationReply{
 	google.protobuf.Timestamp StartDate = 5;
 	google.protobuf.Timestamp CompletionDate = 6;
 	sint32 CompletionPercent = 7;
-	ByteString Timestamp = 8; // can be bytes
+	bytes Timestamp = 8; 
+}
+
+message ApplicantEducationList{
+	repeated ApplicantEducationReply AppEdus = 1;
 }
