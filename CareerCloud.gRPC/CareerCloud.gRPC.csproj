@@ -15,6 +15,7 @@
     <None Remove="Protos\CompanyDescription.proto" />
     <None Remove="Protos\CompanyJob.proto" />
     <None Remove="Protos\CompanyJobEducation.proto" />
+    <None Remove="Protos\CustomTypes\DecimalType.proto" />
     <None Remove="Protos\SecurityLogin.proto" />
     <None Remove="Protos\SecurityLoginsLog.proto" />
     <None Remove="Protos\SystemLanguageCode.proto" />
@@ -24,6 +25,10 @@
     <ProjectReference Include="..\CareerCloud.BusinessLogicLayer\CareerCloud.BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\CareerCloud.EntityFrameworkDataAccess\CareerCloud.EntityFrameworkDataAccess.csproj" />
     <ProjectReference Include="..\CareerCloud.Pocos\CareerCloud.Pocos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\CustomTypes\DecimalType.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>
