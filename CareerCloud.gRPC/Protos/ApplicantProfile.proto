@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
+import "Protos/CustomTypes/DecimalType.proto";
 
 option csharp_namespace = "CareerCloud.gRPC.Protos";
 
@@ -19,8 +20,8 @@ message ApplicantProfileIdRequest{
 message ApplicantProfileReply{
 	string Id = 1;
 	string Login = 2;
-	//decimal CurrentSalary = 3; // need to implement deicmal type
-	//decimal CurrenRate = 4;
+	DecimalType CurrentSalary = 3;  
+	DecimalType CurrenRate = 4;
 	string Currency = 5;
 	string Country = 6;
 	string Province = 7;
