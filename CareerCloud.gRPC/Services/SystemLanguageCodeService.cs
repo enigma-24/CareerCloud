@@ -46,7 +46,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateSystemLanguageCode(SystemLanguageCodeList request, ServerCallContext context)
@@ -57,7 +57,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteSystemLanguageCode(SystemLanguageCodeList request, ServerCallContext context)
@@ -68,7 +68,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private SystemLanguageCodeReply FromPoco(SystemLanguageCodePoco poco)

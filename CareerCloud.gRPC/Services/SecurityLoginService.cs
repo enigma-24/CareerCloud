@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateSecurityLogin(SecurityLoginList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteSecurityLogin(SecurityLoginList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private SecurityLoginReply FromPoco(SecurityLoginPoco poco)
@@ -79,14 +79,14 @@ namespace CareerCloud.gRPC.Services
                 Id = poco.Id.ToString(),
                 EmailAddress = poco.EmailAddress,
                 ForceChangePassword = poco.ForceChangePassword,
-                AgreementAccepted = poco.AgreementAccepted == null ? null : Timestamp.FromDateTime((DateTime)poco.AgreementAccepted),
-                Created = Timestamp.FromDateTime(poco.Created),
+                AgreementAccepted = poco.AgreementAccepted == null ? null : Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)poco.AgreementAccepted, DateTimeKind.Utc)),
+                Created = Timestamp.FromDateTime(DateTime.SpecifyKind(poco.Created, DateTimeKind.Utc)),
                 FullName = poco.FullName,
                 IsInactive = poco.IsInactive,
                 IsLocked = poco.IsLocked,
                 Login = poco.Login,
                 Password = poco.Password,
-                PasswordUpdate = poco.PasswordUpdate == null ? null : Timestamp.FromDateTime((DateTime)poco.PasswordUpdate),
+                PasswordUpdate = poco.PasswordUpdate == null ? null : Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)poco.PasswordUpdate,DateTimeKind.Utc)),
                 PhoneNumber = poco.PhoneNumber,
                 PrefferredLanguage = poco.PrefferredLanguage,
                 TimeStamp = ByteString.CopyFrom(poco.TimeStamp)
@@ -109,7 +109,8 @@ namespace CareerCloud.gRPC.Services
                 PrefferredLanguage = reply.PrefferredLanguage,
                 Created = reply.Created.ToDateTime(),
                 AgreementAccepted = reply.AgreementAccepted == null ? null : (DateTime?)reply.AgreementAccepted.ToDateTime(),
-                PasswordUpdate = reply.PasswordUpdate == null ? null : (DateTime?)reply.PasswordUpdate.ToDateTime()
+                PasswordUpdate = reply.PasswordUpdate == null ? null : (DateTime?)reply.PasswordUpdate.ToDateTime(),
+                TimeStamp = reply.TimeStamp.ToByteArray()
             };
         }
     }

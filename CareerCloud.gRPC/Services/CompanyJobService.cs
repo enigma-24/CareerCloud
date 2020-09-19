@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateCompanyJob(CompanyJobList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteCompanyJob(CompanyJobList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private CompanyJobReply FromPoco(CompanyJobPoco poco)
@@ -80,7 +80,7 @@ namespace CareerCloud.gRPC.Services
                 Company = poco.Company.ToString(),
                 IsCompanyHidden = poco.IsCompanyHidden,
                 IsInactive = poco.IsInactive,
-                ProfileCreated = Timestamp.FromDateTime(poco.ProfileCreated),
+                ProfileCreated = Timestamp.FromDateTime(DateTime.SpecifyKind(poco.ProfileCreated,DateTimeKind.Utc)),
                 TimeStamp = ByteString.CopyFrom(poco.TimeStamp)
             };
         }
@@ -93,7 +93,8 @@ namespace CareerCloud.gRPC.Services
                 Company = Guid.Parse(reply.Company),
                 ProfileCreated = reply.ProfileCreated.ToDateTime(),
                 IsCompanyHidden = reply.IsCompanyHidden,
-                IsInactive = reply.IsInactive
+                IsInactive = reply.IsInactive,
+                TimeStamp = reply.TimeStamp.ToByteArray()
             };
         }
     }

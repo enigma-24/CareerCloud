@@ -46,7 +46,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateSecurityLoginsLog(SecurityLoginsLogList request, ServerCallContext context)
@@ -57,7 +57,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteSecurityLoginsLog(SecurityLoginsLogList request, ServerCallContext context)
@@ -68,7 +68,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private SecurityLoginsLogReply FromPoco(SecurityLoginsLogPoco poco)
@@ -78,7 +78,7 @@ namespace CareerCloud.gRPC.Services
                 Id = poco.Id.ToString(),
                 Login = poco.Login.ToString(),
                 IsSuccesful = poco.IsSuccesful,
-                LogonDate = Timestamp.FromDateTime(poco.LogonDate),
+                LogonDate = Timestamp.FromDateTime(DateTime.SpecifyKind(poco.LogonDate,DateTimeKind.Utc)),
                 SourceIP = poco.SourceIP
             };
         }

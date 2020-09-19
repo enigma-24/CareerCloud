@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateApplicantJobApplication(ApplicantJobApplicationList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteApplicantJobApplication(ApplicantJobApplicationList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private ApplicantJobApplicationReply FromPoco(ApplicantJobApplicationPoco poco)
@@ -79,7 +79,7 @@ namespace CareerCloud.gRPC.Services
                 Id = poco.Id.ToString(),
                 Applicant = poco.Applicant.ToString(),
                 Job = poco.Job.ToString(),
-                ApplicationDate = Timestamp.FromDateTime(poco.ApplicationDate),
+                ApplicationDate = Timestamp.FromDateTime(DateTime.SpecifyKind(poco.ApplicationDate,DateTimeKind.Utc)),
                 Timestamp = ByteString.CopyFrom(poco.TimeStamp)
             };
         }
@@ -92,6 +92,7 @@ namespace CareerCloud.gRPC.Services
                 Applicant = Guid.Parse(reply.Applicant),
                 Job = Guid.Parse(reply.Job),
                 ApplicationDate = reply.ApplicationDate.ToDateTime(),
+                TimeStamp = reply.Timestamp.ToByteArray()
             };
         }
     }

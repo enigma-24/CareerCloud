@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateApplicantProfile(ApplicantProfileList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteApplicantProfile(ApplicantProfileList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private ApplicantProfileReply FromPoco(ApplicantProfilePoco poco)
@@ -85,7 +85,6 @@ namespace CareerCloud.gRPC.Services
                 Province = poco.Province,
                 Street = poco.Street,
                 Timestamp = ByteString.CopyFrom(poco.TimeStamp)
-
             };
         }
 
@@ -100,7 +99,8 @@ namespace CareerCloud.gRPC.Services
                 Login = Guid.Parse(reply.Login),
                 PostalCode = reply.PostalCode,
                 Province = reply.Province,
-                Street = reply.Street
+                Street = reply.Street,
+                TimeStamp = reply.Timestamp.ToByteArray()
             };
         }
     }

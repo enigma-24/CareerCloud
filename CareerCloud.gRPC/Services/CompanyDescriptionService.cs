@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateCompanyDescription(CompanyDescriptionList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteCompanyDescription(CompanyDescriptionList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private CompanyDescriptionReply FromPoco(CompanyDescriptionPoco poco)
@@ -93,7 +93,8 @@ namespace CareerCloud.gRPC.Services
                 Company = Guid.Parse(reply.Company),
                 CompanyDescription = reply.CompanyDescription,
                 CompanyName = reply.CompanyName,
-                LanguageId = reply.LanguageId
+                LanguageId = reply.LanguageId,
+                TimeStamp = reply.TimeStamp.ToByteArray()
             };
         }
     }

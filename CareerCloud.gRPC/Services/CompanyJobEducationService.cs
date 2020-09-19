@@ -47,7 +47,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateCompanyJobEducation(CompanyJobEducationList request, ServerCallContext context)
@@ -58,7 +58,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteCompanyJobEducation(CompanyJobEducationList request, ServerCallContext context)
@@ -69,7 +69,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private CompanyJobEducationReply FromPoco(CompanyJobEducationPoco poco)
@@ -91,7 +91,8 @@ namespace CareerCloud.gRPC.Services
                 Id = Guid.Parse(reply.Id),
                 Importance = (short)reply.Importance,
                 Job = Guid.Parse(reply.Job),
-                Major = reply.Major
+                Major = reply.Major,
+                TimeStamp = reply.TimeStamp.ToByteArray()
             };
         }
     }

@@ -46,7 +46,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(reply));
             }
             logic.Add(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> UpdateApplicantEducation(ApplicantEducationList request, ServerCallContext context)
@@ -57,7 +57,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Update(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         public override Task<Empty> DeleteApplicantEducation(ApplicantEducationList request, ServerCallContext context)
@@ -68,7 +68,7 @@ namespace CareerCloud.gRPC.Services
                 pocos.Add(ToPoco(item));
             }
             logic.Delete(pocos.ToArray());
-            return Task.FromResult<Empty>(null);
+            return Task.FromResult(new Empty());
         }
 
         private ApplicantEducationReply FromPoco(ApplicantEducationPoco poco)
@@ -79,8 +79,8 @@ namespace CareerCloud.gRPC.Services
                 Applicant = poco.Applicant.ToString(),
                 Major = poco.Major,
                 CertificateDiploma = poco.CertificateDiploma,
-                StartDate = poco.StartDate == null ? null : Timestamp.FromDateTime((DateTime)poco.StartDate),
-                CompletionDate = poco.CompletionDate == null ? null : Timestamp.FromDateTime((DateTime)poco.CompletionDate),
+                StartDate = poco.StartDate == null ? null : Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)poco.StartDate,DateTimeKind.Utc)),
+                CompletionDate = poco.CompletionDate == null ? null : Timestamp.FromDateTime(DateTime.SpecifyKind((DateTime)poco.CompletionDate, DateTimeKind.Utc)),
                 CompletionPercent = poco.CompletionPercent == null ? 0 : (byte)poco.CompletionPercent,
                 Timestamp = ByteString.CopyFrom(poco.TimeStamp)
             };
@@ -96,7 +96,8 @@ namespace CareerCloud.gRPC.Services
                 CertificateDiploma = reply.CertificateDiploma,
                 StartDate = reply.StartDate.ToDateTime(),
                 CompletionDate = reply.CompletionDate.ToDateTime(),
-                CompletionPercent = (byte?)reply.CompletionPercent
+                CompletionPercent = (byte?)reply.CompletionPercent,
+                TimeStamp = reply.Timestamp.ToByteArray()
             };
         }
     }
